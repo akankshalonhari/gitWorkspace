@@ -1,0 +1,51 @@
+package SamplesProject.examples;
+import java.util.Arrays;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/*** Hello world! ***/
+
+@RestController
+@EnableAutoConfiguration
+public class App 
+{	
+	@RequestMapping("/")
+    String hello() {
+        return "Hello welcome to Akanksha`s world!";
+    }
+	
+    public static void main( String[] args )
+    {
+        SpringApplication.run(App.class, args);
+        int[] input = new int[]{3, 6, 2, 1, 8, 0, 4};
+        System.out.println("Magic index is: " + magicIndex(input, 0, input.length-1));
+    } 
+    
+    public static int magicIndex(int[] input, int start, int end){
+		System.out.println("start " + start + " end " + end);
+		if(start == end && input[start] == start){
+			return start;
+		}
+		if(start >end)
+			return -1;
+    	int mid = (start + end)/2;
+    	int index = -1;
+    	if(input[mid] == mid){
+    		System.out.println("mid " + mid);
+    		return mid;
+    	} else {
+    		int indexL = magicIndex(input, 0, mid-1);
+    		int indexR = magicIndex(input, mid+1, end);
+    		System.out.println("indexL " + indexL + " indexR " + indexR);
+    		if(indexL != -1){
+    			index = indexL;
+    		} else if(indexR != -1){
+    			index = -1;
+    		}
+    	} 
+    	return index;
+    }
+}

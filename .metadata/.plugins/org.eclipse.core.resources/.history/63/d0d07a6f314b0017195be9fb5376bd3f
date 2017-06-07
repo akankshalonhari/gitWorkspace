@@ -1,0 +1,54 @@
+package SamplesProject.examples;
+
+import java.util.Arrays;
+
+public class QuickSort {
+
+	public QuickSort(){
+		int[] input = new int[]{10, 80, 30, 90, 40, 50, 70};
+		quickSort(input, 0, input.length-1);
+	}
+
+	public static void quickSort(int[] input, int start, int end){
+	    if(start < end){
+	    	int pIndex = partition(input, start, end);
+	    	System.out.println("pIndex" + pIndex);
+	
+	    	quickSort(input, start, pIndex-1);
+	    	quickSort(input, pIndex+1, end);
+	    }
+	    System.out.println(Arrays.toString(input));
+
+	}
+
+	   
+	public static int partition(int[] input, int start, int end){
+	    int pivot = input[input.length-1];
+	    System.out.println(" pivot" + pivot);
+	    int i=-1;
+	    int j=0;
+
+	    while(j<input.length-1){
+	    	System.out.println(" L " + input[i] + " R " + input[j]);
+	    	if(input[j] < pivot){
+	    		System.out.println("swap");
+	    		int temp = input[j];
+	    		input[j] = input[i];
+	    		input[i] = temp;
+	    		i++;
+	    	}
+	    	j++;
+	    }
+
+	    //if(j == input.length-1){
+		System.out.println("swap pivot");
+		int temp = input[end];
+		input[end] = input[i+1];
+		input[i+1] = temp;
+	    //i++;
+	    //}
+
+		System.out.println("return+1 : " + i);
+	    return i+1;
+	}
+}

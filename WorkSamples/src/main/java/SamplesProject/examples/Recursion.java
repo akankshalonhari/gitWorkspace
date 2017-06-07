@@ -22,6 +22,9 @@ public class Recursion {
 	    
 	    String path = "";
         findPaths(0, 0 , path);
+
+        int[] input = new int[]{3, 6, 2, 1, 8, 0, 4};
+        System.out.println("Magic index is: " + magicIndex(input, 0, input.length-1));
 	}
 	
 	/* All subsets of a set */
@@ -30,6 +33,31 @@ public class Recursion {
     	//same code as permutations just added 2 lines below : 
     	//permutations.add(word);
     	//permutations.add(String.valueOf(first));
+    }
+    
+    /* return i such that a[i]=i in a sorted input array */
+    public static int magicIndex(int[] input, int start, int end){
+		int index = -1;
+    	if(start == end){
+			if(input[start] == start)
+    			return start;    		
+    		else 
+    			return -1;
+		} else {
+	    	int mid = (start + end)/2;
+	    	if(input[mid] == mid){
+	    		return mid;
+	    	} else {
+	    		int indexL = magicIndex(input, start, mid-1);
+	    		int indexR = magicIndex(input, mid+1, end);
+	    		if(indexL != -1){
+	    			index = indexL;
+	    		} else if(indexR != -1){
+	    			index = indexR;
+	    		}
+	    	} 
+		}
+    	return index;
     }
     
     /* Permutation of string */
