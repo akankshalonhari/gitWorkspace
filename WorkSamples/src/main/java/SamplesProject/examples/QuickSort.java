@@ -4,41 +4,50 @@ import java.util.Arrays;
 
 public class QuickSort {
 
-	public QuickSort(){
-        int[] input = new int[]{10, 80, 30, 90, 40, 50, 70};
-		quickSort(input, 0, input.length-1);
+	public QuickSort(){ 
+		int[] input = new int[]{10, 80, 30, 90, 40, 50, 70};
+		int result = quickSort(input, 0, input.length-1, 3);
+		System.out.println(" Array :  " + Arrays.toString(input));
+		System.out.println(" k-th smallest element in the array : " + result);
 	}
-
-    
-    public static void quickSort(int[] input, int start, int end){
-	    if(start < end){
-	    	int pIndex = partition(input, start, end);
-	    	
-	    	quickSort(input, start, pIndex-1);
-	    	quickSort(input, pIndex+1, end);
-	    }
-	    System.out.println(Arrays.toString(input));
-    }
-
-	   
-	public static int partition(int[] input, int start, int end){
-		int pivot = input[end];
-	    int i=start-1;
-	    int j=start;
-	    while(j<end){
-	    	if(input[j] < pivot){
-	    		i++;
-	    		int temp = input[j];
-	    		input[j] = input[i];
-	    		input[i] = temp;
-	    	}
-	    	j++;
+	
+	public static int quickSort(int[] input, int start, int end, int k){
+		    //Checking for k to within bounds start and end always
+	    	if((k>0) && (k<=(end-start)+1)){
+		    	int pIndex = partition(input, start, end);
+		    	//if partition index is k
+		    	if(k == pIndex)
+		    		return input[pIndex];
+		    	//only one of the calls will be executed , thus only logN time taken
+		    	if(k < pIndex){
+		    		 return quickSort(input, start, pIndex-1, k);
+		    	} else {
+		    		return quickSort(input, pIndex+1, end, k);
+		    	}
+		    }
+	    	//if k is out of array bound, return max value
+		    return Integer.MAX_VALUE;
 	    }
 
-	    int temp = input[end];
-	    input[end] = input[i+1];
-	    input[i+1] = temp;
-	    	
-	    return i+1;
-	}
+	    /* for every partition sort values to its right and left */	   
+		public static int partition(int[] input, int start, int end){
+			int pivot = input[end];
+		    int i=start-1;
+		    int j=start;
+		    while(j<end){
+		    	//move the smaller elements to left of i i.e all elements ending at i are sorted  
+		    	if(input[j] < pivot){
+		    		i++;
+		    		int temp = input[j];
+		    		input[j] = input[i];
+		    		input[i] = temp;
+		    	}
+		    	j++;
+		    }	
+		    int temp = input[end];
+		    input[end] = input[i+1];
+		    input[i+1] = temp;
+		    	
+		    return i+1;
+		}
 }
