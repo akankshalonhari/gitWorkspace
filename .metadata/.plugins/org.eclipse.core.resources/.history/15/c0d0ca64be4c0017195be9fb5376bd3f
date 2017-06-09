@@ -1,0 +1,82 @@
+package SamplesProject.examples;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.PriorityQueue;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/*** Hello world! ***/
+
+@RestController
+@EnableAutoConfiguration
+public class App 
+{	
+	@RequestMapping("/")
+    String hello() {
+        return "Hello welcome to Akanksha`s world!";
+    }
+	
+    public static void main(String[] args){
+        SpringApplication.run(App.class, args);
+        int[] Arr = new int[]{15, 16, 19, 20, 25, 1, 3, 4, 5,  7, 10, 14};
+        //int[] Arr = new int[]{2, 2, 2, 3, 4, 2};
+        rotatedSearch(Arr, 0, Arr.length-1, 3);
+     }
+    
+    public static int rotatedSearch(int[] Arr, int left, int right, int K){
+    	int index = -1;
+    	System.out.println(Arrays.toString(Arr) + " " + left + " " + right + " " + K);
+    	
+    	if(left > right){
+    		return index;
+    	}
+    	int mid = (left + right) /2;
+    	if(K == Arr[mid]){
+    		System.out.println(" mid " + mid + " elem " + Arr[mid]);
+    		index = mid;
+    		return index;
+    	}
+    	
+    	if(Arr[left] < Arr[mid]){  //array is sorted to left
+
+    		System.out.println(" search left ");
+    		if(Arr[left] <= K && K < Arr[mid]){
+
+        		System.out.println(" search left left ");
+    			return rotatedSearch(Arr, left, mid-1, K); //search left
+    		} else {
+
+        		System.out.println(" search left right ");
+    			return rotatedSearch(Arr, mid+1, right, K); //search right
+    		}
+    	} else if(Arr[mid] < Arr[right]){//array is sorted to right
+
+    		System.out.println(" search right ");
+    		if(Arr[mid] <= K && K < Arr[right]){
+
+        		System.out.println(" search right right ");
+    			return rotatedSearch(Arr, mid+1, right, K); //search right
+    		} else {
+
+        		System.out.println(" search right left ");
+    			return rotatedSearch(Arr, left, mid-1, K); //search left
+    		}
+    	} else if(Arr[left] == Arr[mid]){ //left and rights are all repeats
+    		if(Arr[mid] != Arr[right]){ //if right is diff search it
+    			return rotatedSearch(Arr, mid+1, right, K); 
+    		} else { // else search all 
+    			int result = rotatedSearch(Arr, left, mid-1, K); // search left
+    			if(result == -1){ //let left search return -1 then only search right to avoid more calls
+    				return rotatedSearch(Arr, mid+1, right, K);
+    			} else {
+    				return result;
+    			}
+    		}
+    	}
+    	
+    	return index;
+    }
+}

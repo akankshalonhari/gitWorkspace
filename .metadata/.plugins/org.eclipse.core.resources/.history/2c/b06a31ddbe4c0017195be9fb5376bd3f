@@ -23,7 +23,6 @@ public class SortSearch {
     
     }
 
-	/* Merge 2 sorted arrays one having extra space at end for other */
 	public static int[] mergeArrs(int[] A , int[] B) {
 		int indexA = 0;
 		while(A[indexA] != 0){

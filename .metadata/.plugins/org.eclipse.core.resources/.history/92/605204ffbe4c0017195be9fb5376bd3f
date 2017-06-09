@@ -9,8 +9,7 @@ public class Heap_PriorityQueue {
 	  int[] elems = new int[]{1,8,10, 2, 7, 15, 9, 11};
 	  topKHeap(elems, 5);
 	}
-	 
-	 /* Find top 5 elements everytime you insert elements from a stream */
+	
 	 public static void topKHeap(int[] A, int K){
 	    	PriorityQueue<Integer> heap = new PriorityQueue<Integer>();
 	    	int count=0;
