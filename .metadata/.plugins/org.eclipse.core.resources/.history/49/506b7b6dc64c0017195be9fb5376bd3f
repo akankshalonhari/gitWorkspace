@@ -21,7 +21,13 @@ public class App
 	
     public static void main(String[] args){
         SpringApplication.run(App.class, args);
+        String[] strings = new Strings[]{"at","","","","ball","","","car","","","dad", "",""};
     }
     
-
+    public static int searchSparse(String[] strings, String search){
+    	int index = -1;
+    	
+    	return index;
+    }
+    
 }

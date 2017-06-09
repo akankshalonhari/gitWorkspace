@@ -97,7 +97,7 @@ public class SortSearch {
     	return index;
     }
 	
-	/* Sparse search */
+	
     public static int searchSparse(String[] strings, String search){
     	if(strings == null || search == null || search == "") // base cases to check empty or null strings
     		return -1;
@@ -105,7 +105,6 @@ public class SortSearch {
     	return search(strings, 0, strings.length-1, search);
     }
     
-    /* Sparse Search  - search a string in an array with lots of empty strings in it*/
     private static int search(String[] strings, int start, int end, String search){
     	int index = -1;
     	if(start > end)
