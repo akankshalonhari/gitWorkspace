@@ -283,49 +283,49 @@ class LinkedList{
 	LinkedList(){
 	}
 
-public void push(int newVal){
-	Node newnode = new Node(newVal);
-	if(head == null){
-		head = newnode;
-	} else {
+	public void push(int newVal){
+		Node newnode = new Node(newVal);
+		if(head == null){
+			head = newnode;
+		} else {
+			Node curr = head;
+			while(curr.next != null){
+				curr = curr.next;
+			}
+			curr.next = newnode;
+			if (newVal==4) //modification to make list circular -- isLoop method only
+				newnode.next=head;
+		}
+	}
+
+	public int length(){
 		Node curr = head;
-		while(curr.next != null){
+		int count = 0;
+		while(curr != null){
+			count++;
 			curr = curr.next;
 		}
-		curr.next = newnode;
-		if (newVal==4) //modification to make list circular -- isLoop method only
-			newnode.next=head;
+		return count;
 	}
-}
 
-public int length(){
-	Node curr = head;
-	int count = 0;
-	while(curr != null){
-		count++;
-		curr = curr.next;
+	public String toString(){
+		String string = "";
+		Node curr = head;
+		while(curr.next != null){
+			string = string + String.valueOf(curr.data) + "->";
+			curr = curr.next;
+		}
+		string = string + String.valueOf(curr.data);
+		return string;
+		}
 	}
-	return count;
-}
-
-public String toString(){
-	String string = "";
-	Node curr = head;
-	while(curr.next != null){
-		string = string + String.valueOf(curr.data) + "->";
-		curr = curr.next;
-	}
-	string = string + String.valueOf(curr.data);
-	return string;
-	}
-}
-
-class Node{
-	int data;
-	Node next;
 	
-	Node(int d){
-		this.data = d;
-		this.next = null;
-	}	
-}
+	class Node{
+		int data;
+		Node next;
+		
+		Node(int d){
+			this.data = d;
+			this.next = null;
+		}	
+	}

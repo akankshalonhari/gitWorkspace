@@ -23,6 +23,12 @@ public class SortSearch {
     
         String[] strings = new String[]{"at","","","","ball","","","car","","","dad", "",""};
         System.out.println(" Index of search string is : " + searchSparse(strings, "dad"));
+	
+        int[] inputTemp = new int[]{0, 2, 4, 6, 8, 11, 15, 17, 22, -1, -1, -1, -1, -1, -1};
+        Listy listy = new Listy();
+        listy.input = inputTemp;
+        System.out.println(" Index of Kth element is  " + sortedSearchNoSize(listy, 15));
+  
 	}
 
 	/* Merge 2 sorted arrays one having extra space at end for other */
@@ -140,5 +146,40 @@ public class SortSearch {
     		return search(strings, start, mid-1, search); //search left arr
     	}
     }
-	
+    
+    /* sorted search with size of array not available */
+    public static int sortedSearchNoSize(Listy listy, int K){
+    	int index = 1;
+    	while(listy.elementAt(index) != -1 && listy.elementAt(index)< K){ //element in further right in list
+    		//Keep increasing the index exponentially till we find element greater than K
+    		index = index * 2;
+    	}
+    	//once we find element greater than K, do a regular binary search to search from prev index to current
+    	return binarySearch(listy, index/2, index, K);
+    }
+    
+    public static int binarySearch(Listy listy, int start, int end, int K){
+		int mid;
+		while(start < end){
+			mid = (start+end)/2;
+			int midElem = listy.elementAt(mid);
+			if(midElem > K || midElem == -1){
+				end = mid -1; //we treat mid==-1 as too big value, and so search left
+			} else if(midElem < K){
+				start = mid +1;
+			} else {
+				return mid;
+			}
+		}
+    	return -1;
+    }
+
+    class Listy{
+    	int[] input = new int[25];
+    	public int elementAt(int i){
+    		if(i > input.length-1)
+    			return -1;
+    		return input[i-1];
+    	}
+    }
 }

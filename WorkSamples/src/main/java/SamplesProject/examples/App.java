@@ -2,6 +2,7 @@ package SamplesProject.examples;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.PriorityQueue;
+import java.util.Vector;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -22,6 +23,4 @@ public class App
     public static void main(String[] args){
         SpringApplication.run(App.class, args);
     }
-    
-
 }
