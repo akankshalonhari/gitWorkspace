@@ -31,7 +31,7 @@ public class RandomImp {
 	        phoneMap.put("2", r1);
 	        phoneMap.put("3", r2);
 	        phoneMap.put("4", r3);
-	        letterCombinations("23");
+	        
 	        letterCombinations("234");
 	}
 	
@@ -82,18 +82,21 @@ public class RandomImp {
 	        return result;
 	    }
 	 
-	 /* Given the digits of phone number, convert it to its corresponding letters combination from a phone-dial */
+	 
 	 public static List<String> letterCombinations(String digits) {
 	        List<String> result = null;
 	        if(digits.length() == 1){
 	            result = phoneMap.get(String.valueOf(digits.charAt(0)));
+	            System.out.println("result 1" + result);
 	        } else {
 	            List<String> current = phoneMap.get(String.valueOf(digits.charAt(0)));
 	            List<String> next = letterCombinations(digits.substring(1));
+	            System.out.println("curr " + current.toString() + " next " + next.toString());
 	            result = new ArrayList<String>();
 	            for(int i=0; i<current.size() ;i++){
 	                for(int j=0; j<next.size() ;j++){
 	                    result.add(current.get(i) + next.get(j));
+	                    System.out.println("result 2" + result);
 	                }            
 	            }
 	        }

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 public class App 
 {	
+	public static HashMap<String, ArrayList<String>> phoneMap = new HashMap<String, ArrayList<String>>(); 
+    
 	@RequestMapping("/")
     String hello() {
         return "Hello welcome to Akanksha`s world!";
@@ -26,6 +28,21 @@ public class App
 	
     public static void main(String[] args){
         SpringApplication.run(App.class, args);
+        ArrayList<String> r1 = new ArrayList<String>() {{
+            add("a");
+            add("b");
+            add("c");
+        }};
+        ArrayList<String> r2 = new ArrayList<String>() {{
+            add("d");
+            add("e");
+            add("f");
+        }};
+        phoneMap.put("2", r1);
+        phoneMap.put("3", r2);
+        
+        letterCombinations("23");
+        
         /*Graph g = new Graph(5);
         g.addEdge(0, 1);
         g.addEdge(0, 2);
@@ -39,7 +56,28 @@ public class App
         g.addEdge(4, 3);
         
         g.printGraph(g);*/
-    }    
+    }  
+    
+    public static List<String> letterCombinations(String digits) {
+        List<String> result = null;
+        if(digits.length() == 1){
+            result = phoneMap.get(digits.charAt(0)));
+            System.out.println("result 1" + result);
+        } else {
+            List<String> current = phoneMap.get(digits.charAt(0));
+            List<String> next = letterCombinations(digits.substring(1));
+            System.out.println("curr " + current.toString() + " next " + next.toString());
+            result = new ArrayList<String>();
+            for(int i=0; i<current.size() ;i++){
+                for(int j=0; j<next.size() ;j++){
+                    result.add(current.get(i) + next.get(j));
+                    System.out.println("result 2" + result);
+                }            
+            }
+        }
+        System.out.println("result " + result);
+        return result;
+    }
 }
 
 /*

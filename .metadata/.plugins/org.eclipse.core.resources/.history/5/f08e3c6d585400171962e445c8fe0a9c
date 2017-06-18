@@ -82,7 +82,7 @@ public class RandomImp {
 	        return result;
 	    }
 	 
-	 /* Given the digits of phone number, convert it to its corresponding letters combination from a phone-dial */
+	 /* Given the digits of phone number, convert it to its corresponding letters combination */
 	 public static List<String> letterCombinations(String digits) {
 	        List<String> result = null;
 	        if(digits.length() == 1){
