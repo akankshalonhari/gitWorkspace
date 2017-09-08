@@ -1,0 +1,4 @@
+com/weatherapp/main/WeatherAppMainApplication.class
+com/weatherapp/dto/WeatherDetails.class
+com/weatherapp/main/WeatherAppController.class
+com/weatherapp/weatherservice/WeatherAppService.class
